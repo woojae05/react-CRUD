@@ -1,0 +1,33 @@
+input[type="text"] {
+    padding: 12px 10px;
+    margin: 5px 0px;
+    width: 100%;
+  }
+  
+  input[type="submit"] {
+    padding: 5px;
+  }
+  
+  input[type="checkbox"] + label {
+    cursor: pointer;
+  }
+  
+  label {
+    padding: 0 10px;
+  }
+  
+  .inputBox {
+    margin-top: 5px;
+  }
+  
+  form {
+    margin-top: 2rem;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+  }
+  .wrapper {
+    width: 45%;
+  }
+  
+  

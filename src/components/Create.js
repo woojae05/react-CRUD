@@ -9,9 +9,6 @@ function Create() {
 
   const postData = e => {
     e.preventDefault();
-    console.log(firstName);
-    console.log(lastName);
-    console.log(checkbox);
     axios.post('https://612e28b3d11e5c00175583c4.mockapi.io/fakeData',{
       firstName:firstName,
       lastName:lastName,

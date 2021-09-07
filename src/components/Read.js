@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Read.css";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 function Read() {
   const [APIData, SetAPIData] = useState([]);
@@ -12,7 +13,7 @@ function Read() {
         // console.log(response.data);
         SetAPIData(response.data);
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err.response);
       });
   }, []);
@@ -30,8 +31,14 @@ function Read() {
             <tr>
               <td>{data.firstName}</td>
               <td>{data.lastName}</td>
-              <td>{data.checkbox ? "true":"false"} </td>
-            <td><button>edit</button></td>
+              <td>{data.checkbox ? "true" : "false"} </td>
+              <td>
+              <Link to="/Update">
+                <table.Cell>
+                  <button>update</button>
+                </table.Cell>
+              </Link>
+                </td>
             </tr>
           );
         })}

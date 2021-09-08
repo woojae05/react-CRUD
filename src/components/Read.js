@@ -5,6 +5,13 @@ import { Link } from 'react-router-dom';
 
 function Read() {
   const [APIData, SetAPIData] = useState([]);
+  const setData = (data)=>{
+    let{id,firstName,lastName,checkbox} = data;
+    localStorage.setItem('ID',id);
+    localStorage.setItem('FirstName',firstName);
+    localStorage.setItem('Lastname',lastName);
+    localStorage.setItem('checkbox Value',checkbox);
+  }
 
   useEffect(() => {
     axios
@@ -32,13 +39,11 @@ function Read() {
               <td>{data.firstName}</td>
               <td>{data.lastName}</td>
               <td>{data.checkbox ? "true" : "false"} </td>
+              <Link to='/Update'>
               <td>
-              <Link to="/Update">
-                <table.Cell>
-                  <button>update</button>
-                </table.Cell>
+              <button onClick={()=>{setData(data)}}>Update</button>
+              </td>
               </Link>
-                </td>
             </tr>
           );
         })}

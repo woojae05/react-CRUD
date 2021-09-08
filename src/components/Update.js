@@ -2,10 +2,30 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function Update() {
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [checkbox, setCheckbox] = useState(false);
+  const [id,setID] = useState(null);
 
+  useEffect(()=>{
+    setID(localStorage.getItem("ID"));
+    setFirstName(localStorage.getItem("FirstName"));
+    setLastName(localStorage.getItem("LastName"));
+    setCheckbox(localStorage.getItem("chekbox Value")==="true");
+  },[]);
+
+  const postData= (e)=>{
+    e.preventDefault();
+    axios.
+    put(`https://612c3261ab461c00178b5c25.mockapi.io/fakeData${id}`
+    ,
+    {
+      firstName,
+      lastName,
+      checkbox,
+  });
+      };
   return (
     <form>
       <div className="wrapper">
@@ -26,7 +46,6 @@ function Update() {
             value={lastName}
             onChange={(e) => {
               setLastName(e.target.value);
-              console.log(lastName);
             }}
             type="text"
             placeholder="Last Name"

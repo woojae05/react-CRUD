@@ -7,7 +7,6 @@ function Update() {
   const [lastName, setLastName] = useState("");
   const [id, setID] = useState(null);
   const [checkbox, setCheckbox] = useState(false);
-  let api=`https://612e28b3d11e5c00175583c4.mockapi.io/fakeData/${id}`
   useEffect(() => {
     setID(localStorage.getItem("ID"));
     console.log(id);
@@ -23,11 +22,7 @@ function Update() {
         firstName,
         lastName,
         checkbox,
-      }).then(
-        console.log(api),
-        console.log(firstName)
-      )
-
+      })
   };
   return (
     <form>

@@ -13,16 +13,25 @@ function Read() {
     localStorage.setItem('checkbox',checkbox);
   }
 
-  useEffect(() => {
+  const getData=()=>{
     axios
-      .get(`https://612e28b3d11e5c00175583c4.mockapi.io/fakeData`)
-      .then((response) => {
-        // console.log(response.data);
-        SetAPIData(response.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+    .get(`https://612e28b3d11e5c00175583c4.mockapi.io/fakeData`)
+    .then(response=>{
+      SetAPIData(response.data);
+    })
+    
+  }
+
+  const onDelete=(id)=>{
+    axios
+    .delete(`https://612e28b3d11e5c00175583c4.mockapi.io/fakeData/${id}`)
+    .then(()=>{
+      getData();
+    })
+  }
+
+  useEffect(() => {
+    getData();
   }, []);
 
   return (
@@ -44,6 +53,9 @@ function Read() {
               <button onClick={()=>{setData(data)}}>Update</button>
               </td>
               </Link>
+              <td>
+                <button onClick={()=>onDelete(data.id)}>delete</button>
+              </td>
             </tr>
           );
         })}

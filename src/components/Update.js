@@ -5,27 +5,30 @@ function Update() {
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [id, setID] = useState(null);
   const [checkbox, setCheckbox] = useState(false);
-  const [id,setID] = useState(null);
-
-  useEffect(()=>{
+  let api=`https://612e28b3d11e5c00175583c4.mockapi.io/fakeData/${id}`
+  useEffect(() => {
     setID(localStorage.getItem("ID"));
+    console.log(id);
     setFirstName(localStorage.getItem("FirstName"));
-    setLastName(localStorage.getItem("LastName"));
-    setCheckbox(localStorage.getItem("chekbox Value")==="true");
-  },[]);
+    setLastName(localStorage.getItem("Lastname"));
+    setCheckbox(localStorage.getItem("checkbox") === "true");
+  }, []);
 
-  const postData= (e)=>{
+  const postData = (e) => {
     e.preventDefault();
     axios.
-    put(`https://612c3261ab461c00178b5c25.mockapi.io/fakeData${id}`
-    ,
-    {
-      firstName,
-      lastName,
-      checkbox,
-  });
-      };
+      put(`https://612e28b3d11e5c00175583c4.mockapi.io/fakeData/${id}`, {
+        firstName,
+        lastName,
+        checkbox,
+      }).then(
+        console.log(api),
+        console.log(firstName)
+      )
+
+  };
   return (
     <form>
       <div className="wrapper">
@@ -53,8 +56,11 @@ function Update() {
         </div>
         <div className="inputBox">
           <input
-            value={checkbox}
-            onChange={(e) => setCheckbox(!checkbox)}
+            checked={checkbox}
+            onChange={(e) => {
+              setCheckbox(!checkbox)
+            }
+            }
             id="agreeBox"
             type="checkbox"
           />

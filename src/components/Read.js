@@ -10,7 +10,7 @@ function Read() {
     localStorage.setItem('ID',id);
     localStorage.setItem('FirstName',firstName);
     localStorage.setItem('Lastname',lastName);
-    localStorage.setItem('checkbox Value',checkbox);
+    localStorage.setItem('checkbox',checkbox);
   }
 
   useEffect(() => {

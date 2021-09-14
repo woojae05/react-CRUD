@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {useHistory} from'react-router';
 
 function Update() {
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [id, setID] = useState(null);
+  const history = useHistory();
   const [checkbox, setCheckbox] = useState(false);
   useEffect(() => {
     setID(localStorage.getItem("ID"));
@@ -22,6 +24,9 @@ function Update() {
         firstName,
         lastName,
         checkbox,
+      })
+      .then(()=>{
+        history.push('/read')
       })
   };
   return (

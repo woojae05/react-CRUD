@@ -1,11 +1,13 @@
 import React,{useState} from "react";
 import "../styles/Create.css";
 import axios from 'axios';
+import {useHistory} from "react-router"
 
 function Create() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [checkbox, setcCheckbox] = useState(false);
+  const history = useHistory();
 
   const postData = e => {
     e.preventDefault();
@@ -13,7 +15,10 @@ function Create() {
       firstName:firstName,
       lastName:lastName,
       checkbox:checkbox,
-    });
+    })
+    .then(()=>{
+      history.push('/read');
+    })
   };
 
   return (

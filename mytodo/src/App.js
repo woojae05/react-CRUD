@@ -3,6 +3,7 @@ import List from "./List.jsx"
 import React,{ useState,useEffect } from 'react';
 import useFetch from './useFetch';
 import Header from "./Header.jsx"
+import Form from './Form';
 
 const App = ()=>{
    const [todos,setTodos] = useState([])
@@ -15,7 +16,8 @@ const App = ()=>{
   }
   const addTodo = (e) => {
     e.preventDefault();
-    setTodos([...todos,{id:todos.length+1,title:newTodo,}])
+    console.log(newTodo)
+    setTodos([...todos,{id:todos.length+1,title:newTodo,status:"todo"}])
   }
   
   const changeStatus = (id)=>{
@@ -35,10 +37,13 @@ const App = ()=>{
    return(
      <>
      <Header todos={todos}/>
+     
     <form action="">
       <input type="text" onChange={onchange}/>
       <button onClick={addTodo}>할일추가</button>
     </form>
+
+    {/* <Form addTodo={addTodo} onchange={onchange}/> */}
 
     <List todos={todos} loading={loading} changeStatus={changeStatus}/>
     </>

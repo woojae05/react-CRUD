@@ -1,10 +1,13 @@
-import React from 'react'
+import React,{useContext} from 'react'
+import { TodoContext } from './Todostore'
+import "./Form.css"
 
-const Form = ({addTodo,onchange}) => {
+const Form = () => {
+    const {addTodo,onchange} = useContext(TodoContext)
     return (
-        <form action=''>
-            <input type="text" onchange={onchange}></input>
-            <button onClick={addTodo}>할일추가</button>
+        <form action="">
+            <input type="text" onChange={onchange}/>
+            <button onClick={addTodo} className='addBtn'>추가</button>
         </form>
     )
 }

@@ -1,31 +1,18 @@
 import './App.css';
-import List from "./List.jsx"
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import useFetch from './useFetch';
-import Header from "./Header.jsx"
-import Form from './Form';
+import { toDoReducer } from './reducer';
 
-export const TodoContext = React.createContext( )
+export const TodoContext = React.createContext();
 
-const TodoStore = () => {
-  const [todos, setTodos] = useState([])
+const TodoStore = (props) => {
+  const [todos,dispatch] = useReducer(toDoReducer,[]);
 
-  const loading = useFetch(setTodos, 'http://localhost:8080/todo')
-
-  const addTodo = (newTodo) => {
-    console.log(newTodo)
-    setTodos([...todos, { id: todos.length + 1, title: newTodo, status: "todo" }])
+  const setInitData = (initData) =>{
+    dispatch({type:"SET_INIT_DATA",payload:initData});
   }
 
-  const changeStatus = (id) => {
-    const updateTodos = todos.map((todo) => {
-      if (todo.id === +id) {
-        todo.status === "todo" ? todo.status = "done" : todo.status = "todo"
-      }
-      return todo;
-    })
-    setTodos(updateTodos)
-  }
+  const loading = useFetch(setInitData,'http://localhost:8080/todo');
 
   useEffect(() => {
     console.log("새로운 내용이 추가됨", todos)
@@ -35,13 +22,8 @@ const TodoStore = () => {
     <body>
 
       <div className='todoList'>
-        <TodoContext.Provider value={{todos,addTodo,changeStatus,loading}}>
-        <Header />
-
-        <Form />
-
-        <List />
-
+        <TodoContext.Provider value={{todos,loading,dispatch}}>
+          {props.children}
         </TodoContext.Provider>
       </div>
     </body>
